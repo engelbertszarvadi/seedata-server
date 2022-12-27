@@ -1,0 +1,3 @@
+npx nodemon index.js
+
+added command to 'package.json' script: 'start'
