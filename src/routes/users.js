@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../config/connection");
 
-router.get("/", (req, res) => {
+router.get("/", (_, res) => {
   db.query("SELECT * FROM users", (error, result) => {
     if (error) {
       throw new Error(error);
@@ -16,14 +16,14 @@ router.post("/getMeasurementsById", (req, res) => {
   const userId = req.body.id;
 
   db.query(
-    "SELECT * FROM measurementstable INNER JOIN users ON users.id = measurementstable.userId WHERE userId = ?",
+    "SELECT * FROM measurements INNER JOIN users ON users.id = measurements.userId WHERE userId = ?",
     [userId],
     (error, result) => {
       if (result?.length > 0) {
         const results = [];
         result.map((element) => {
           results.push({
-            measurementId: element.measurementId,
+            measurementId: element.measurementID,
             value: element.value,
             unit: element.unit,
             uploadDate: element.uploadDate,

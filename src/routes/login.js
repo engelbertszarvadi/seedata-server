@@ -10,7 +10,7 @@ router.post("/", (req, res) => {
     "SELECT * FROM users WHERE BINARY username = ? AND BINARY password = ?",
     [username, password],
     (error, result) => {
-      if (result.length > 0) {
+      if (result?.length > 0) {
         res.send({
           id: result[0].id,
           status: "Success",
